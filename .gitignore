@@ -1,0 +1,20 @@
+# Build artifacts
+bin/
+obj/
+**/net8.0/
+
+# MonoGame cache
+.mgcache/
+
+# User-specific settings
+*.user
+*.suo
+*.userprefs
+
+# VSCode settings
+.vscode/
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
