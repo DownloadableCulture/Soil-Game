@@ -29,3 +29,4 @@ C:\Users\Jelee\Desktop\Game Projects\Soil\Soil\obj\Debug\net8.0\refint\Soil.dll
 C:\Users\Jelee\Desktop\Game Projects\Soil\Soil\obj\Debug\net8.0\Soil.pdb
 C:\Users\Jelee\Desktop\Game Projects\Soil\Soil\obj\Debug\net8.0\Soil.genruntimeconfig.cache
 C:\Users\Jelee\Desktop\Game Projects\Soil\Soil\obj\Debug\net8.0\ref\Soil.dll
+C:\Users\Jelee\Desktop\Game Projects\Soil\Soil\obj\Debug\net8.0\Soil.sourcelink.json
