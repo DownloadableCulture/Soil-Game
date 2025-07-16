@@ -8,6 +8,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private SpriteFont mainFont;
 
     public Game1()
     {
@@ -26,6 +27,7 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        mainFont = Content.Load<SpriteFont>("8BitDragon");
 
         // TODO: use this.Content to load your game content here
     }
