@@ -9,6 +9,7 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private SpriteFont mainFont;
+    private GameState currentState;
 
     public Game1()
     {
@@ -27,7 +28,8 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        mainFont = Content.Load<SpriteFont>("8BitDragon");
+        mainFont = Content.Load<SpriteFont>("Fonts/8BitDragon");
+        currentState = new StartScreen(mainFont);
 
         // TODO: use this.Content to load your game content here
     }
@@ -46,8 +48,14 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.DeepPink);
 
-        // TODO: Add your drawing code here
+        _spriteBatch.Begin();
+
+        currentState.Draw(_spriteBatch);
+
+        _spriteBatch.End();
 
         base.Draw(gameTime);
+
+        
     }
 }
