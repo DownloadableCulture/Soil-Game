@@ -6,6 +6,8 @@ namespace Soil;
 
 public class Game1 : Game
 {
+    public Vector2 WindowSize { get; private set; }
+   
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private SpriteFont mainFont;
@@ -16,11 +18,18 @@ public class Game1 : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+
+        _graphics.PreferredBackBufferWidth = 1600;
+        _graphics.PreferredBackBufferHeight = 900;
+        _graphics.ApplyChanges();
     }
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
+        WindowSize = new Vector2(
+        GraphicsDevice.Viewport.Width,
+        GraphicsDevice.Viewport.Height
+    );
 
         base.Initialize();
     }
@@ -29,7 +38,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         mainFont = Content.Load<SpriteFont>("Fonts/8BitDragon");
-        currentState = new StartScreen(mainFont);
+        currentState = new StartScreen(mainFont, WindowSize);
 
         // TODO: use this.Content to load your game content here
     }

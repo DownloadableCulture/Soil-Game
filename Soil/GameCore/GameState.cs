@@ -5,10 +5,12 @@ using Microsoft.Xna.Framework.Input;
 public abstract class GameState
 {
     protected SpriteFont font;
+    protected Vector2 WindowSize;
     protected KeyboardState previousKeyboardState;
-    public GameState(SpriteFont font)
+    public GameState(SpriteFont font, Vector2 windowSize)
     {
         this.font = font;
+        this.WindowSize = windowSize;
         previousKeyboardState = Keyboard.GetState();
 
     }

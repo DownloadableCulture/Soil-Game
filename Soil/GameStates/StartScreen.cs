@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 public class StartScreen : GameState
 {
-    public StartScreen(SpriteFont font) : base(font)
+    public StartScreen(SpriteFont font, Vector2 windowSize) : base(font, windowSize)
     {}
 
     public override void Update(GameTime gameTime)
@@ -21,6 +21,8 @@ public class StartScreen : GameState
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.DrawString(font, "Welcome To Soil", new Vector2(100, 100), Color.White);
+
+
+        spriteBatch.DrawString(font, "Welcome To Soil", new Vector2(WindowSize.X/2-100, WindowSize.Y/2), Color.White);
     }
 }
