@@ -11,7 +11,7 @@ public abstract class GameState
     public GameState(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager)
     {
         this.font = font;
-        this.WindowSize = windowSize;
+        WindowSize = windowSize;
         previousKeyboardState = Keyboard.GetState();
         this.gameStateManager = gameStateManager;
 

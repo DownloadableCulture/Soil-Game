@@ -14,8 +14,7 @@ public class StartScreen : GameState
         var currentKeyboardState = Keyboard.GetState();
         if (currentKeyboardState.IsKeyDown(Keys.Enter) && !previousKeyboardState.IsKeyDown(Keys.Enter))
         {
-            // Enter was just pressed!
-            // TODO: Switch game state or start game
+            gameStateManager.ChangeState(new TestState(font, WindowSize, gameStateManager));
         }
         previousKeyboardState = currentKeyboardState;
     
