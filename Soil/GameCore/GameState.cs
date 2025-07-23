@@ -7,11 +7,13 @@ public abstract class GameState
     protected SpriteFont font;
     protected Vector2 WindowSize;
     protected KeyboardState previousKeyboardState;
-    public GameState(SpriteFont font, Vector2 windowSize)
+    protected GameStateManager gameStateManager;
+    public GameState(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager)
     {
         this.font = font;
         this.WindowSize = windowSize;
         previousKeyboardState = Keyboard.GetState();
+        this.gameStateManager = gameStateManager;
 
     }
     public virtual void Update(GameTime gameTime)

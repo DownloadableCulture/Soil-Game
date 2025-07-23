@@ -4,8 +4,10 @@ using Microsoft.Xna.Framework.Input;
 
 public class StartScreen : GameState
 {
-    public StartScreen(SpriteFont font, Vector2 windowSize) : base(font, windowSize)
-    {}
+    public StartScreen(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager) : base(font, windowSize, gameStateManager)
+    {
+        this.gameStateManager = gameStateManager;
+     }
 
     public override void Update(GameTime gameTime)
     {

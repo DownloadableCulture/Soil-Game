@@ -11,7 +11,7 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private SpriteFont mainFont;
-    private GameState currentState;
+    private GameStateManager gameStateManager;
 
     public Game1()
     {
@@ -38,7 +38,8 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         mainFont = Content.Load<SpriteFont>("Fonts/8BitDragon");
-        currentState = new StartScreen(mainFont, WindowSize);
+        gameStateManager = new GameStateManager();
+        gameStateManager.SetInitialState(new StartScreen(mainFont, WindowSize, gameStateManager));
 
         // TODO: use this.Content to load your game content here
     }
@@ -49,7 +50,7 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-
+        gameStateManager.Update(gameTime);
         base.Update(gameTime);
     }
 
@@ -59,7 +60,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
 
-        currentState.Draw(_spriteBatch);
+        gameStateManager.Draw(_spriteBatch);
 
         _spriteBatch.End();
 
