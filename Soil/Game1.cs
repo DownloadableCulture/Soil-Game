@@ -39,7 +39,7 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         mainFont = Content.Load<SpriteFont>("Fonts/8BitDragon");
         gameStateManager = new GameStateManager();
-        gameStateManager.SetInitialState(new StartScreen(mainFont, WindowSize, gameStateManager));
+        gameStateManager.SetupGameStates(mainFont, WindowSize);
 
         // TODO: use this.Content to load your game content here
     }
