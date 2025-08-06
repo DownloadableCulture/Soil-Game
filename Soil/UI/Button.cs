@@ -9,6 +9,7 @@ public class Button
     public Texture2D HighlightedTexture { get; set; }
     public bool IsSelected { get; set; }
     public Action OnSelect { get; set; }
+    public float Scale { get; set; } = 1f;
     public Button(Texture2D normal, Texture2D highlighted, Vector2 position, Action onSelect = null)
     {
         NormalTexture = normal;
@@ -21,7 +22,7 @@ public class Button
     public virtual void Draw(SpriteBatch spriteBatch)
     {
         var texture = IsSelected ? HighlightedTexture : NormalTexture;
-        spriteBatch.Draw(texture, Position, Color.White);
+        spriteBatch.Draw(texture, Position, null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
     }
 
     public virtual void Select()

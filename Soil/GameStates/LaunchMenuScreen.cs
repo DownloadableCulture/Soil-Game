@@ -10,10 +10,19 @@ public class LaunchMenuScreen : GameState
     private PlaceholderButton button2;
     private int selectedIndex = 0;
     private KeyboardState previousKeyboardState;
+    private Vector2 _windowSize;
     public LaunchMenuScreen(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager) : base(font, windowSize, gameStateManager)
     {
-        button1 = new PlaceholderButton(new Vector2(100, 100), () => OnButton1Selected());
-        button2 = new PlaceholderButton(new Vector2(100, 160), () => OnButton2Selected());
+        _windowSize = windowSize;
+        button1 = new PlaceholderButton(new Vector2(_windowSize.X / 2 - 360 / 2, _windowSize.Y / 2 - 100), () => OnButton1Selected())
+        {
+            Scale = 4f
+        };
+
+        button2 = new PlaceholderButton(new Vector2(_windowSize.X / 2 - 360 / 2, _windowSize.Y / 2 + 100), () => OnButton2Selected())
+        {
+            Scale = 4f
+        };
 
         button1.IsSelected = true;
 
@@ -50,7 +59,7 @@ public class LaunchMenuScreen : GameState
             else button2.Select();
         }
 
-        
+
         previousKeyboardState = currentKeyboardState;
     }
 
