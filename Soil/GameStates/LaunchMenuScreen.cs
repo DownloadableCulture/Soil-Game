@@ -2,61 +2,50 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 public class LaunchMenuScreen : GameState
 {
 
-    private PlaceholderButton button1;
-    private PlaceholderButton button2;
+    private List<PlaceholderButton> buttons = new();
     private int selectedIndex = 0;
-    private KeyboardState previousKeyboardState;
-    private Vector2 _windowSize;
-    public LaunchMenuScreen(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager) : base(font, windowSize, gameStateManager)
+    public LaunchMenuScreen(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager)
+    : base(font, windowSize, gameStateManager)
     {
         _windowSize = windowSize;
-        button1 = new PlaceholderButton(new Vector2(_windowSize.X / 2 - 360 / 2, _windowSize.Y / 2 - 100), () => OnButton1Selected())
-        {
-            Scale = 4f
-        };
 
-        button2 = new PlaceholderButton(new Vector2(_windowSize.X / 2 - 360 / 2, _windowSize.Y / 2 + 100), () => OnButton2Selected())
-        {
-            Scale = 4f
-        };
+        float buttonSpacing = 200f;
+        float buttonWidth = 360f; //this can be dynamic instead of hardcoded
+        float startY = _windowSize.Y / 2 - (buttonSpacing * 1.5f); 
 
-        button1.IsSelected = true;
+        buttons.Add(new PlaceholderButton(new Vector2(_windowSize.X / 2 - buttonWidth / 2, startY + 0 * buttonSpacing), () => OnButtonSelected(0), "Start", font) { Scale = 4f });
+        buttons.Add(new PlaceholderButton(new Vector2(_windowSize.X / 2 - buttonWidth / 2, startY + 1 * buttonSpacing), () => OnButtonSelected(1), "Settings", font) { Scale = 4f });
+        buttons.Add(new PlaceholderButton(new Vector2(_windowSize.X / 2 - buttonWidth / 2, startY + 2 * buttonSpacing), () => OnButtonSelected(2), "Back", font) { Scale = 4f });
 
+        buttons[0].IsSelected = true;
     }
-    private void OnButton1Selected()
-    {
-
-        Console.WriteLine("Button 1 Selected!");
-    }
-
-    private void OnButton2Selected()
-    {
-
-        Console.WriteLine("Button 2 Selected!");
-    }
+    private void OnButtonSelected(int index)
+{
+    Console.WriteLine($"Button {index + 1} Selected!");
+}
     public override void Update(GameTime gameTime)
     {
         KeyboardState currentKeyboardState = Keyboard.GetState();
 
         if (IsKeyPressed(currentKeyboardState, Keys.Down))
         {
-            selectedIndex = (selectedIndex + 1) % 2;
+            selectedIndex = (selectedIndex + 1) % buttons.Count;
             UpdateSelection();
         }
         else if (IsKeyPressed(currentKeyboardState, Keys.Up))
         {
-            selectedIndex = (selectedIndex - 1 + 2) % 2;
+            selectedIndex = (selectedIndex - 1 + buttons.Count) % buttons.Count;
             UpdateSelection();
         }
 
         if (IsKeyPressed(currentKeyboardState, Keys.Enter))
         {
-            if (selectedIndex == 0) button1.Select();
-            else button2.Select();
+            buttons[selectedIndex].Select();
         }
 
 
@@ -69,15 +58,15 @@ public class LaunchMenuScreen : GameState
     }
 
     private void UpdateSelection()
-    {
-        button1.IsSelected = selectedIndex == 0;
-        button2.IsSelected = selectedIndex == 1;
-    }
+{
+    for (int i = 0; i < buttons.Count; i++)
+        buttons[i].IsSelected = i == selectedIndex;
+}
 
     public override void Draw(SpriteBatch spriteBatch)
-    {
-        button1.Draw(spriteBatch);
-        button2.Draw(spriteBatch);
-    }
+{
+    foreach (var button in buttons)
+        button.Draw(spriteBatch);
+}
 }
 

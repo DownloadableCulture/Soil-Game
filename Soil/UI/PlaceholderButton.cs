@@ -16,12 +16,14 @@ public class PlaceholderButton : Button
         _isInitialized = true;
     }
 
-    public PlaceholderButton(Vector2 position, Action onSelect = null)
+     public PlaceholderButton(Vector2 position, Action onSelect = null, string label = "", SpriteFont font = null)
         : base(
             _normalTexture ?? throw new Exception("PlaceholderButton textures not initialized!"),
             _highlightedTexture ?? throw new Exception("PlaceholderButton textures not initialized!"),
             position,
-            onSelect)
+            onSelect,
+            label,
+            font)
     {
         if (!_isInitialized)
             throw new Exception("Call InitializeTextures before creating PlaceholderButtons");
