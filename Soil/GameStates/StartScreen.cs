@@ -14,7 +14,7 @@ public class StartScreen : GameState
         var currentKeyboardState = Keyboard.GetState();
         if (currentKeyboardState.IsKeyDown(Keys.Enter) && !previousKeyboardState.IsKeyDown(Keys.Enter))
         {
-            gameStateManager.ChangeState(new TestState(font, _windowSize, gameStateManager));
+            gameStateManager.ChangeState(new LaunchMenuScreen(font, _windowSize, gameStateManager));
         }
         previousKeyboardState = currentKeyboardState;
     

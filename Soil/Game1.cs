@@ -38,6 +38,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         mainFont = Content.Load<SpriteFont>("Fonts/8BitDragon");
+        PlaceholderButton.InitializeTextures(Content);
         gameStateManager = new GameStateManager();
         gameStateManager.SetupGameStates(mainFont, WindowSize);
 
