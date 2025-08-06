@@ -22,8 +22,12 @@ public class StartScreen : GameState
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-
-
-        spriteBatch.DrawString(font, "Welcome To Soil", new Vector2(_windowSize.X/2-100, _windowSize.Y/2), Color.White);
-    }
+    string text = "Welcome To Soil\n\n\nPress ENTER to Start";
+    Vector2 textSize = font.MeasureString(text);
+    Vector2 position = new Vector2(
+        (_windowSize.X - textSize.X) / 2,
+        (_windowSize.Y - textSize.Y) / 2
+    );
+    spriteBatch.DrawString(font, text, position, Color.White);
+}
 }
