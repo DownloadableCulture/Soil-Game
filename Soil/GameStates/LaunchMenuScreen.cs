@@ -32,6 +32,10 @@ public class LaunchMenuScreen : GameState
         {
             gameStateManager.ChangeState(new TestState(gameStateManager));
         }
+        if (index == 2)
+        {
+            gameStateManager.ChangeState(new StartScreen(gameStateManager));
+        }
     }
     public override void Update(GameTime gameTime)
     {
