@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class TestState : GameState
 {
-    public TestState(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager) : base(font, windowSize, gameStateManager)
+    public TestState(GameStateManager gameStateManager) : base(gameStateManager)
     {
        
     }

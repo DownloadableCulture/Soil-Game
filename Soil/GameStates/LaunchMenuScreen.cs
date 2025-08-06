@@ -9,14 +9,14 @@ public class LaunchMenuScreen : GameState
 
     private List<PlaceholderButton> buttons = new();
     private int selectedIndex = 0;
-    public LaunchMenuScreen(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager)
-    : base(font, windowSize, gameStateManager)
+    public LaunchMenuScreen(GameStateManager gameStateManager)
+    : base(gameStateManager)
     {
-        _windowSize = windowSize;
+        
 
         float buttonSpacing = 200f;
         float buttonWidth = 360f; //this can be dynamic instead of hardcoded
-        float startY = _windowSize.Y / 2 - (buttonSpacing * 1.5f); 
+        float startY = _windowSize.Y / 2 - (buttonSpacing * 1.5f);
 
         buttons.Add(new PlaceholderButton(new Vector2(_windowSize.X / 2 - buttonWidth / 2, startY + 0 * buttonSpacing), () => OnButtonSelected(0), "Start", font) { Scale = 4f });
         buttons.Add(new PlaceholderButton(new Vector2(_windowSize.X / 2 - buttonWidth / 2, startY + 1 * buttonSpacing), () => OnButtonSelected(1), "Settings", font) { Scale = 4f });
@@ -25,12 +25,21 @@ public class LaunchMenuScreen : GameState
         buttons[0].IsSelected = true;
     }
     private void OnButtonSelected(int index)
-{
-    Console.WriteLine($"Button {index + 1} Selected!");
-}
+    {
+        Console.WriteLine($"Button {index + 1} Selected!");
+
+        if (index == 0)
+        {
+            gameStateManager.ChangeState(new TestState(gameStateManager));
+        }
+    }
     public override void Update(GameTime gameTime)
     {
         KeyboardState currentKeyboardState = Keyboard.GetState();
+        if (IsKeyPressed(currentKeyboardState, Keys.Enter))
+        {
+            buttons[selectedIndex].Select();  // This calls OnButtonSelected(selectedIndex)
+        }
 
         if (IsKeyPressed(currentKeyboardState, Keys.Down))
         {
@@ -58,15 +67,15 @@ public class LaunchMenuScreen : GameState
     }
 
     private void UpdateSelection()
-{
-    for (int i = 0; i < buttons.Count; i++)
-        buttons[i].IsSelected = i == selectedIndex;
-}
+    {
+        for (int i = 0; i < buttons.Count; i++)
+            buttons[i].IsSelected = i == selectedIndex;
+    }
 
     public override void Draw(SpriteBatch spriteBatch)
-{
-    foreach (var button in buttons)
-        button.Draw(spriteBatch);
-}
+    {
+        foreach (var button in buttons)
+            button.Draw(spriteBatch);
+    }
 }
 

@@ -4,14 +4,19 @@ using Microsoft.Xna.Framework.Input;
 
 public abstract class GameState
 {
-    protected SpriteFont font;
-    protected Vector2 _windowSize;
+    protected static SpriteFont font;
+    protected static Vector2 _windowSize;
     protected KeyboardState previousKeyboardState;
     protected GameStateManager gameStateManager;
-    public GameState(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager)
+
+    public static void InitializeStatic(SpriteFont sharedFont, Vector2 sharedWindowSize)
     {
-        this.font = font;
-        _windowSize = windowSize;
+        font = sharedFont;
+        _windowSize = sharedWindowSize;
+    }
+    public GameState(GameStateManager gameStateManager)
+    {
+        
         previousKeyboardState = Keyboard.GetState();
         this.gameStateManager = gameStateManager;
 

@@ -10,11 +10,11 @@ public class GameStateManager
     public TestState TestState { get; private set; }
     public LaunchMenuScreen LaunchMenuScreen { get; private set; }
 
-    public void SetupGameStates(SpriteFont font, Vector2 windowSize)
+    public void SetupGameStates()
     {
-        StartScreen = new StartScreen(font, windowSize, this);
-        TestState = new TestState(font, windowSize, this);
-        LaunchMenuScreen = new LaunchMenuScreen(font, windowSize, this);
+        StartScreen = new StartScreen(this);
+        TestState = new TestState(this);
+        LaunchMenuScreen = new LaunchMenuScreen(this);
 
         SetInitialState(StartScreen);
     }

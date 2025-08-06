@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 public class StartScreen : GameState
 {
-    public StartScreen(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager) : base(font, windowSize, gameStateManager)
+    public StartScreen(GameStateManager gameStateManager) : base(gameStateManager)
     {
         
      }
@@ -14,7 +14,7 @@ public class StartScreen : GameState
         var currentKeyboardState = Keyboard.GetState();
         if (currentKeyboardState.IsKeyDown(Keys.Enter) && !previousKeyboardState.IsKeyDown(Keys.Enter))
         {
-            gameStateManager.ChangeState(new LaunchMenuScreen(font, _windowSize, gameStateManager));
+            gameStateManager.ChangeState(new LaunchMenuScreen(gameStateManager));
         }
         previousKeyboardState = currentKeyboardState;
     
