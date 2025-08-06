@@ -9,6 +9,7 @@ public class LaunchMenuScreen : GameState
     private PlaceholderButton button1;
     private PlaceholderButton button2;
     private int selectedIndex = 0;
+    private KeyboardState previousKeyboardState;
     public LaunchMenuScreen(SpriteFont font, Vector2 windowSize, GameStateManager gameStateManager) : base(font, windowSize, gameStateManager)
     {
         button1 = new PlaceholderButton(new Vector2(100, 100), () => OnButton1Selected());
@@ -30,30 +31,38 @@ public class LaunchMenuScreen : GameState
     }
     public override void Update(GameTime gameTime)
     {
-        KeyboardState kState = Keyboard.GetState();
+        KeyboardState currentKeyboardState = Keyboard.GetState();
 
-        if (kState.IsKeyDown(Keys.Down))
+        if (IsKeyPressed(currentKeyboardState, Keys.Down))
         {
-            selectedIndex = (selectedIndex + 1) % 2;  // cycle between 0 and 1
+            selectedIndex = (selectedIndex + 1) % 2;
             UpdateSelection();
         }
-        else if (kState.IsKeyDown(Keys.Up))
+        else if (IsKeyPressed(currentKeyboardState, Keys.Up))
         {
-            selectedIndex = (selectedIndex - 1 + 2) % 2;  // cycle up with wraparound
+            selectedIndex = (selectedIndex - 1 + 2) % 2;
             UpdateSelection();
         }
 
-        // For demo, simulate pressing Enter to "click" the selected button
-        if (kState.IsKeyDown(Keys.Enter))
+        if (IsKeyPressed(currentKeyboardState, Keys.Enter))
         {
             if (selectedIndex == 0) button1.Select();
             else button2.Select();
         }
+
+        
+        previousKeyboardState = currentKeyboardState;
     }
+
+    private bool IsKeyPressed(KeyboardState current, Keys key)
+    {
+        return current.IsKeyDown(key) && previousKeyboardState.IsKeyUp(key);
+    }
+
     private void UpdateSelection()
     {
-        button1.IsSelected = (selectedIndex == 0);
-        button2.IsSelected = (selectedIndex == 1);
+        button1.IsSelected = selectedIndex == 0;
+        button2.IsSelected = selectedIndex == 1;
     }
 
     public override void Draw(SpriteBatch spriteBatch)
