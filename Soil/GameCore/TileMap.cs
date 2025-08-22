@@ -5,8 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 public class TileMap
 {
     private int[,] map;
-    private Dictionary<int, Texture2D> tileTextures;
     private int tileSize;
+    private Dictionary<int, Texture2D> tileTextures; // <- mapping from tile index to texture
 
     public int Width => map.GetLength(1);
     public int Height => map.GetLength(0);
@@ -17,6 +17,7 @@ public class TileMap
         this.tileTextures = tileTextures;
         this.tileSize = tileSize;
     }
+
     public void Draw(SpriteBatch spriteBatch)
     {
         for (int y = 0; y < Height; y++)
@@ -24,11 +25,15 @@ public class TileMap
             for (int x = 0; x < Width; x++)
             {
                 int tileIndex = map[y, x];
-                if (tileTextures.ContainsKey(tileIndex))
+                if (tileIndex != 0 && tileTextures.ContainsKey(tileIndex))
                 {
-                    spriteBatch.Draw(tileTextures[tileIndex], new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize), Color.White);
+                    spriteBatch.Draw(
+                        tileTextures[tileIndex],
+                        new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize),
+                        Color.White
+                    );
                 }
             }
         }
-    }  
+    }
 }

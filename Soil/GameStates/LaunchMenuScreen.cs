@@ -30,7 +30,7 @@ public class LaunchMenuScreen : GameState
 
         if (index == 0)
         {
-            gameStateManager.ChangeState(new TestState(gameStateManager));
+            gameStateManager.ChangeState(new Desert1(gameStateManager));
         }
         if (index == 2)
         {
